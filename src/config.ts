@@ -1,5 +1,5 @@
 export const config = {
   base_url: 'https://run.mocky.io',
-  customer_path: '/v3/07acae80-d898-4136-a803-4adc1a3131eb',
-  wine_path: '/v3/fb94d1e0-f157-4133-94d7-37de04d5a8e6',
+  customer_path: '/v3/8143a06a-c200-4482-b1ca-ad5f45c114dd',
+  wine_path: '/v3/37105b2e-7783-4133-bbd4-632503347c95',
 }
