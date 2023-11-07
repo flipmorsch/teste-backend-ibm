@@ -1,6 +1,6 @@
-import { config } from "../../config"
-import { Wine } from "../../domain/entities/wine"
-import { Http } from "../../infra/http"
+import {config} from '../../config'
+import {Wine} from '../../domain/entities/wine'
+import {Http} from '../../infra/http'
 
 export class WineService {
   private readonly wine_path = config.wine_path
