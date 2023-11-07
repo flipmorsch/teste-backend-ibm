@@ -1,5 +1,7 @@
+import {config} from '../config'
+
 export class Http {
-  constructor(private readonly url: string) {}
+  private readonly url = config.base_url
 
   async get<T>(path: string): Promise<T> {
     const response = await fetch(this.url + path)
