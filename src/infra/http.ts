@@ -1,5 +1,7 @@
+import {injectable} from 'tsyringe'
 import {config} from '../config'
 
+@injectable()
 export class Http {
   private readonly url = config.base_url
 
