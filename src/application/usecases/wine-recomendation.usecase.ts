@@ -1,12 +1,14 @@
+import {inject, injectable} from 'tsyringe'
 import {CustomerOrder} from '../dtos/customer-order'
 import {CustomerService} from '../services/customer.service'
 import {WineService} from '../services/wine.service'
 import {CustomerOrderUtils} from '../shared/utils/customer-order.utils'
 
+@injectable()
 export class WineRecomendationUseCase {
   constructor(
-    private customerService: CustomerService,
-    private wineService: WineService
+    @inject(CustomerService) private customerService: CustomerService,
+    @inject(WineService) private wineService: WineService
   ) {}
 
   async execute(nome: string): Promise<string> {

@@ -1,8 +1,10 @@
+import { injectable } from 'tsyringe'
 import {CustomerOrder} from '../dtos/customer-order'
 import {CustomerService} from '../services/customer.service'
 import {WineService} from '../services/wine.service'
 import {CustomerOrderUtils} from '../shared/utils/customer-order.utils'
 
+@injectable()
 export class HighestOrderUseCase {
   constructor(
     private customerService: CustomerService,

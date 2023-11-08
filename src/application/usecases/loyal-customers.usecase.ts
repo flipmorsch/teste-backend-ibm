@@ -1,9 +1,11 @@
+import { injectable } from 'tsyringe'
 import {CustomerOrder} from '../dtos/customer-order'
 import {LoyalCustomer} from '../dtos/loyal-customer'
 import {CustomerService} from '../services/customer.service'
 import {WineService} from '../services/wine.service'
 import {CustomerOrderUtils} from '../shared/utils/customer-order.utils'
 
+@injectable()
 export class LoyalCustomersUsecase {
   constructor(
     private customerService: CustomerService,
