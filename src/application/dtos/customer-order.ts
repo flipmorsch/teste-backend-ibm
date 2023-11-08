@@ -2,10 +2,12 @@ export type CustomerOrder = {
   nome: string
   cpf: string
   telefone: string
-  tipo_vinho: string
-  preco: number
-  quantidade_comprada: number
-  safra: string
-  ano_compra: number
-  total: number
+  compras_vinho: {
+    tipo: string
+    quantidade: number
+    safra: string
+    preco: number
+    ano_compra: number
+    total: number
+  }
 }
