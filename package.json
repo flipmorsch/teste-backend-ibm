@@ -15,7 +15,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "test": "ts-node src/infra/express/app.ts"
+    "start": "ts-node src/infra/express/app.ts"
   },
   "keywords": [],
   "author": "",
