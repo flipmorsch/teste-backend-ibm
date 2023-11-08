@@ -1,3 +1,4 @@
+import {Http} from '../../infra/http'
 import {CustomerOrder} from '../dtos/customer-order'
 import {CustomerService} from '../services/customer.service'
 import {WineService} from '../services/wine.service'
@@ -14,11 +15,8 @@ export class GetCustomerOrderUseCase {
       await this.customerService.getCustomers(),
       await this.wineService.getWines(),
     ])
-    const customerOrders = CustomerOrderUtils.associateWinesToCustomers(
-      customers,
-      wines
-    )
+    const customerOrders = CustomerOrderUtils.mapOrders(customers, wines)
 
-    return customerOrders.sort((a, b) => a.total - b.total)
+    return customerOrders
   }
 }

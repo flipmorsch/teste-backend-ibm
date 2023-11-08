@@ -14,10 +14,12 @@ export class HighestOrderUseCase {
       await this.customerService.getCustomers(),
       await this.wineService.getWines(),
     ])
-    const customerOrdersByYear = CustomerOrderUtils.associateWinesToCustomers(
+    const customerOrdersByYear = CustomerOrderUtils.mapOrders(
       customers,
       wines
-    ).filter(customerOrder => customerOrder.ano_compra === ano_compra)
+    ).filter(
+      customerOrder => customerOrder.compras_vinho.ano_compra === ano_compra
+    )
 
     return this.getHighestOrderByYear(customerOrdersByYear)
   }
@@ -27,7 +29,9 @@ export class HighestOrderUseCase {
   ): CustomerOrder {
     let highestOrder = customerOrders[0]
     customerOrders.forEach(customerOrder => {
-      if (customerOrder.total > highestOrder.total) {
+      if (
+        customerOrder.compras_vinho.total > highestOrder.compras_vinho.total
+      ) {
         highestOrder = customerOrder
       }
     })

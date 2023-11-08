@@ -1,4 +1,3 @@
-import {Http} from '../../infra/http'
 import {CustomerOrder} from '../dtos/customer-order'
 import {LoyalCustomer} from '../dtos/loyal-customer'
 import {CustomerService} from '../services/customer.service'
@@ -11,20 +10,16 @@ export class LoyalCustomersUsecase {
     private wineService: WineService
   ) {}
 
-  async execute(): Promise<any> {
+  async execute(): Promise<LoyalCustomer[]> {
     const [customers, wines] = await Promise.all([
       await this.customerService.getCustomers(),
       await this.wineService.getWines(),
     ])
-    const customerOrders = CustomerOrderUtils.associateWinesToCustomers(
-      customers,
-      wines
-    )
-    const calculatedCustomersOrders =
-      this.calculateTotalCustomersOrders(customerOrders)
-    calculatedCustomersOrders.sort((a, b) => b.total - a.total)
-    calculatedCustomersOrders.length = 3
-    return calculatedCustomersOrders
+    const customerOrders = CustomerOrderUtils.mapOrders(customers, wines)
+    const loyalCustomers = this.calculateTotalCustomersOrders(customerOrders)
+    loyalCustomers.sort((a, b) => b.total - a.total)
+    loyalCustomers.length = 3
+    return loyalCustomers
   }
 
   private calculateTotalCustomersOrders(
@@ -36,16 +31,15 @@ export class LoyalCustomersUsecase {
           customer => customer.cpf === customerOrder.cpf
         )
         if (customer) {
-          customer.quantidade_comprada += customerOrder.quantidade_comprada
-          customer.total += customerOrder.total
+          customer.quantidade_comprada += customerOrder.compras_vinho.quantidade
+          customer.total += customerOrder.compras_vinho.total
         } else {
           acc.push({
             nome: customerOrder.nome,
             cpf: customerOrder.cpf,
             telefone: customerOrder.telefone,
-            tipo_vinho_preferido: customerOrder.tipo_vinho,
-            quantidade_comprada: customerOrder.quantidade_comprada,
-            total: customerOrder.total,
+            quantidade_comprada: customerOrder.compras_vinho.quantidade,
+            total: customerOrder.compras_vinho.total,
           })
         }
         return acc
