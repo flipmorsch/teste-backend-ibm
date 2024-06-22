@@ -3,6 +3,7 @@ import {container} from 'tsyringe'
 import {GetCustomerOrderUseCase} from '../get-customer-order.usecase'
 import {CustomerOrderUtils} from '../../shared/utils/customer-order.utils'
 
+jest.mock('../../../infra/http')
 describe('GetCustomerOrderUseCase Unit Tests', () => {
   let getCustomerOrderUseCase: GetCustomerOrderUseCase
   beforeEach(() => {

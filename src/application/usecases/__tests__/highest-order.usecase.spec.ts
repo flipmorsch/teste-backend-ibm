@@ -3,6 +3,8 @@ import {container} from 'tsyringe'
 import {CustomerOrderUtils} from '../../shared/utils/customer-order.utils'
 import {HighestOrderUseCase} from '../highest-order.usecase'
 
+jest.mock('../../../infra/http')
+
 describe('HighestOrderUseCase Unit Tests', () => {
   let highestOrderUseCase: HighestOrderUseCase
   beforeEach(() => {
